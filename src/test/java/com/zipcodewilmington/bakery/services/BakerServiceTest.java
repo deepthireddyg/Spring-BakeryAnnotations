@@ -23,13 +23,13 @@ import static org.mockito.BDDMockito.given;
 @ContextConfiguration(classes = BakeryApplication.class)
 public class BakerServiceTest {
     @MockBean
-    private BakerService service;
+    private BakerService bakerService;
 
     private BakerController controller;
 
     @Before
     public void setup(){
-        this.controller = new BakerController(service);
+        this.controller = new BakerController(bakerService);
     }
 
 
@@ -39,7 +39,7 @@ public class BakerServiceTest {
         HttpStatus expected = HttpStatus.CREATED;
         Baker expectedBaker = new Baker(null, null, null);
         BDDMockito
-                .given(service.create(expectedBaker))
+                .given(bakerService.create(expectedBaker))
                 .willReturn(expectedBaker);
 
         // When
@@ -60,7 +60,7 @@ public class BakerServiceTest {
         HttpStatus expected = HttpStatus.OK;
         Baker expectedBaker = new Baker(bakerId, null, null, null);
         BDDMockito.
-                given(service.show(1L))
+                given(bakerService.show(1L))
                 .willReturn(expectedBaker);
 
         // When

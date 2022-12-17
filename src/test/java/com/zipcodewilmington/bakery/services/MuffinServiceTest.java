@@ -21,13 +21,13 @@ import static org.mockito.BDDMockito.given;
 @WebMvcTest(MuffinService.class)
 public class MuffinServiceTest {
     @MockBean
-    private MuffinService service;
+    private MuffinService muffinService;
 
     private MuffinController controller;
 
     @Before
     public void setup(){
-        this.controller = new MuffinController(service);
+        this.controller = new MuffinController(muffinService);
     }
 
 
@@ -36,7 +36,7 @@ public class MuffinServiceTest {
         // Given
         HttpStatus expected = HttpStatus.CREATED;
         Muffin expectedMuffin = new Muffin();
-        given(service.create(expectedMuffin)).willReturn(expectedMuffin);
+        given(muffinService.create(expectedMuffin)).willReturn(expectedMuffin);
 
         // When
         ResponseEntity<Muffin> response = controller.create(expectedMuffin);
@@ -55,7 +55,7 @@ public class MuffinServiceTest {
         Long bakerId = 1L;
         HttpStatus expected = HttpStatus.OK;
         Muffin expectedMuffin = new Muffin();
-        given(service.show(1L)).willReturn(expectedMuffin);
+        given(muffinService.show(1L)).willReturn(expectedMuffin);
 
         // When
         ResponseEntity<Muffin> response = controller.show(bakerId);
